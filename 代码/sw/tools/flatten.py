@@ -55,6 +55,29 @@ def read_clean(path):
     return '\n'.join(out).strip('\n')
 
 
+HOOK = '// __MEM_INIT_HOOK__'
+
+
+def init_block(hex_path):
+    """把 128 位/行的 hex 转成 initial 赋值（综合可用的存储器初值）"""
+    if not hex_path:
+        return ''
+    lines = []
+    idx = 0
+    for raw in io.open(hex_path, encoding='utf-8', errors='ignore'):
+        h = raw.strip()
+        if not h or h.startswith('//') or h.startswith('@'):
+            continue
+        h = h.split('//')[0].strip()
+        if len(h) != 32:
+            raise SystemExit('bad hex line in %s: %r' % (hex_path, h))
+        lines.append('        mem[%d] = 128\'h%s;' % (idx, h))
+        idx += 1
+    if not lines:
+        return ''
+    return '    initial begin\n' + '\n'.join(lines) + '\n    end'
+
+
 def defs_body(path):
     """去掉 include guard，只保留宏定义"""
     text = read_clean(path)
@@ -76,6 +99,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('-o', '--out', default=os.path.join(CODE, 'rtl_flat', 'riscv_soc_flat.v'))
     ap.add_argument('--top', default='fpga_top')
+    ap.add_argument('--init-imem', default=None, help='用该 hex 文件生成 imem 初值')
+    ap.add_argument('--init-dmem', default=None, help='用该 hex 文件生成 dmem 初值')
     args = ap.parse_args()
 
     parts = []
@@ -92,6 +117,14 @@ def main():
         if not os.path.exists(path):
             raise SystemExit('missing: %s' % path)
         body = defs_body(path) if rel.endswith('.vh') else read_clean(path)
+        if HOOK in body:
+            if rel == 'mem/imem.v':
+                blk = init_block(args.init_imem)
+            elif rel == 'mem/dmem.v':
+                blk = init_block(args.init_dmem)
+            else:
+                blk = ''
+            body = body.replace(HOOK, blk if blk else '// (无存储器初值)')
         parts.append('// --------------------------------------------------------------------------')
         parts.append('//  from: rtl/%s' % rel)
         parts.append('// --------------------------------------------------------------------------')

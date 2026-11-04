@@ -37,8 +37,8 @@ module fpga_top #(
     localparam DEB_CYCLES   = (CLK_HZ / 1000) * KEY_DEBOUNCE_MS;  // 135000 @ 27 MHz
 
     //------------------------- 内部上电复位 --------------------------------
-    reg [15:0] por_cnt;
-    reg        por_n;
+    reg [15:0] por_cnt = 16'd0;   // 上电初值（FPGA 触发器上电为 0，仿真也需显式给出）
+    reg        por_n   = 1'b0;
 
     always @(posedge clk) begin
         if (por_cnt >= POR_CYCLES[15:0]) begin
@@ -91,7 +91,7 @@ module fpga_top #(
     endgenerate
 
     //------------------------- 心跳 -----------------------------------------
-    reg [25:0] heartbeat;
+    reg [25:0] heartbeat = 26'd0;
     always @(posedge clk) begin
         if (!sys_rst_n) heartbeat <= 26'd0;
         else            heartbeat <= heartbeat + 26'd1;
@@ -123,6 +123,6 @@ module fpga_top #(
 
     //------------------------- 状态指示（低电平点亮） -----------------------
     // LED[3] 测试完成  LED[2] 测试通过  LED[1] 按键翻转  LED[0] 心跳
-    assign led = ~{test_done, test_pass, key_toggle[0], heartbeat[25]};
+    assign led = ~{test_done, test_pass, key_toggle[0], heartbeat[24]};
 
 endmodule
