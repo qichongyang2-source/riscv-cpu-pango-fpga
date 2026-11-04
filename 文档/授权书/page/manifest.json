@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "backend": "native",
+  "rasterEngine": "pdfium",
+  "source": "saved",
+  "inputPath": "F:\\edge download\\d863a974-2595-4db2-a43b-709e64cc392e.pdf",
+  "sourceSha256": "b6b8d7706c1cf5589c3c616470940d7a3ecdcca02ada59c7eb621694c42a05d9",
+  "dpi": 300,
+  "pageCount": 1,
+  "images": [
+    {
+      "index": 1,
+      "page": 1,
+      "path": "C:\\Users\\25924\\Desktop\\FPGA创新大赛-紫光同创RISC_V_CPU\\文档\\授权书\\page\\page-0001.png",
+      "width": 2481,
+      "height": 3508,
+      "rectangle": {
+        "x": 0,
+        "y": 0,
+        "width": 793.7333333333333,
+        "height": 1122.5333333333333
+      },
+      "byteLength": 572517
+    }
+  ],
+  "missingFonts": []
+}
