@@ -224,7 +224,7 @@ def main():
     h2(doc, '1.4  主要性能指标')
     table(doc, ['指标', '数值', '说明'],
           [['流水线', '5 级', 'IF/ID/EX/MEM/WB，分支 EX 解析'],
-           ['工艺/平台', '紫光同创 PGL22G（待定）', 'Verilog-2001，可综合'],
+           ['工艺/平台', '紫光同创 PG2L200H（Logos2）', 'Verilog-2001，可综合'],
            ['综合资源', '10 919 LUT / 3 726 FF', '含 AI，Artix-7 OOC 估算'],
            ['存储资源', '28 个 BRAM', '2×64 KB 主存 + Cache'],
            ['CoreMark', '357 397 拍/迭代', 'CRC 与官方一致，≈2.80 CoreMark/MHz'],
@@ -262,10 +262,11 @@ def main():
 
     h2(doc, '2.2  硬件系统介绍')
     h3(doc, '2.2.1  硬件整体介绍')
-    para(doc, '目标平台为紫光同创 PGL22G 系列开发板（具体型号待板卡到位后确认）。'
+    para(doc, '目标平台为紫光同创 PG2L200H（Logos2 系列，FBB676 封装）远程实验箱。'
               '按综合评估，全 SoC 约 10.9K LUT、3.7K 触发器、28 个 BRAM、20 个 DSP，'
-              '对 PGL22G 的逻辑资源占用约一半，属于可容纳但偏紧的规模；'
-              '若板卡资源更紧张，可将 AI 缓冲改为同步读 BRAM、或将加速器阵列由 4 路降为 2 路。')
+              '仅占该器件逻辑资源的一小部分，余量充足，无需为资源做裁剪。'
+              '板载时钟 27 MHz，复位为低有效按键；实测中远程平台的复位脚可能长期为低，'
+              '因此板级顶层默认使用内部上电复位，仅当明确需要实体复位键时才切换到外部复位。')
     para(doc, '板级顶层 fpga_top 已完成：包含复位同步、时钟直连（预留 PLL 位置）、'
               'UART 收发、LED 状态指示与按键输入，并将 SoC 的测试通过/失败状态映射到 LED。'
               '约束方面提供了 PDS 的引脚约束模板与 SDC 时序模板，板卡确定后按原理图填写即可。')
@@ -298,9 +299,11 @@ def main():
     para(doc, '目前已完成处理器内核、存储层次、外设、AI 加速器的 RTL 设计，'
               '完成自检平台与 15 项回归、CoreMark 与 MNIST 两套真实负载的仿真验证，'
               '并完成 Vivado 综合的资源与时序评估。')
-    para(doc, '受板卡尚未到位影响，本部分暂缺实物照片（整机、45° 全貌、接口特写等），'
-              '将在租借板卡后补充：整体实物图、开发板关键角度照片、上板运行 CoreMark/MNIST 的现场照片。'
-              '本版本以仿真结果作为完成情况的证据。')
+    para(doc, '板级工程已在远程实验箱（PG2L200H）上完成适配与仿真验证：顶层为 27 MHz 时钟、'
+              '内部上电复位、5 ms 按键消抖加下降沿翻转、UART 按 115200 波特率分频（234）、'
+              'LED 低电平点亮取反。板级仿真中 CoreMark 的 Total ticks 与四项 CRC 与 SoC 级仿真完全一致，'
+              '串口输出 431 个字符、LED 状态正确。受单次租期限制，实物烧录照片与演示视频将在下一次租借时补充，'
+              '本版本以板级仿真与 SoC 级仿真结果作为完成情况的证据。')
 
     h2(doc, '3.2  工程成果')
     h3(doc, '3.2.1  机械成果')
@@ -337,7 +340,8 @@ def main():
            ['CoreMark 折算', '≈2.80 CoreMark/MHz'],
            ['MNIST 识别', '19/20（95%），整程序 170 691 拍'],
            ['综合资源（含 AI）', '10 919 LUT / 3 726 FF / 28 BRAM / 20 DSP'],
-           ['时序（Artix-7 OOC）', 'WNS −3.10 ns，估算 ≈76 MHz（未布局布线）']],
+           ['时序（Artix-7 OOC）', 'WNS −3.10 ns，估算 ≈76 MHz（未布局布线）'],
+           ['板级验证（PG2L200H）', '27 MHz 下 CoreMark 板级仿真通过，ticks/CRC 与 SoC 级一致']],
           widths=[5.0, 11.2], size=9)
 
     h3(doc, '3.3.3  与同类设计对比（定性）')
@@ -375,10 +379,10 @@ def main():
         '[4] Sarah L. Harris, David Money Harris. Digital Design and Computer Architecture: RISC-V Edition. 2021.',
         '[5] EEMBC. CoreMark: An Industry Standard Benchmark for Embedded Processors. 2023.',
         '[6] Yann LeCun, Corinna Cortes, Christopher J.C. Burges. The MNIST Database of Handwritten Digits.',
-        '[7] 紫光同创. PGL22G 器件手册与 PDS 开发工具用户指南.',
+        '[7] 紫光同创. PG2L200H（Logos2）器件手册与 PDS 开发工具用户指南.',
         '[8] 胡伟武等. 计算机体系结构（RISC-V 版）. 清华大学出版社, 2022.',
         '[9] Jacob Benesty, et al. 定点量化与神经网络压缩相关综述（IEEE Signal Processing Magazine, 2020）.',
-        '[10] 赛题一：基于紫光同创 RISC-V 指令集 CPU 设计. 2025 紫光同创杯 FPGA 创新大赛.',
+        '[10] 赛题一：基于紫光同创 RISC-V 指令集 CPU 设计. 2026 紫光同创杯 FPGA 创新大赛.',
     ]
     for r in refs:
         p = doc.add_paragraph()

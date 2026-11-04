@@ -185,4 +185,4 @@ crcfinal  : 0xe714
 ## 8. 后续工作
 
 见 `doc/03_后续路线.md`：Cache 两路组相联 / 关键块优先、BTB + 两位饱和计数器、
-译码级分支解析、M 扩展、CoreMark 移植、PGL22G 板级工程与 PDS 约束。
+译码级分支解析、M 扩展、CoreMark 移植、PG2L200H 板级工程与 PDS 约束。

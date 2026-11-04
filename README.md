@@ -3,7 +3,7 @@
 基于国产 FPGA 平台的 **RV32I 五级流水 RISC-V 处理器**，配套两路组相联 Cache、
 BTB 动态分支预测、M 扩展乘除法、完整机器模式异常/中断，以及一块 **INT8 边缘 AI 加速器**（MNIST 推理）。
 
-> 2025 紫光同创杯 FPGA 创新大赛 · 赛题一参赛作品（板卡待定，当前完成设计、仿真与综合评估）
+> 2026 紫光同创杯 FPGA 创新大赛 · 赛题一参赛作品（已适配紫光同创 PG2L200H 实验箱，完成板级仿真）
 
 ## 关键指标
 
@@ -54,7 +54,7 @@ vvp sim.vvp +MAX=2000000 +UART
 ## 工具链
 
 - 仿真：Icarus Verilog 12.0 / Vivado Simulator 2023.1
-- 综合：Vivado 2023.1（Artix-7，OOC 评估；目标器件为紫光同创 PGL22G，PDS 工程待板卡）
+- 综合：Vivado 2023.1（Artix-7，OOC 评估；实际器件为紫光同创 PG2L200H，板级工程见 `rtl_flat/` 与 `文档/上板记录.md`）
 - 交叉编译：riscv-none-elf-gcc 14.2.0（`-march=rv32im_zicsr -O2`）
 - PC 端：Python 3 + numpy
 

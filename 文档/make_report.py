@@ -182,7 +182,7 @@ def cover(doc):
 
     doc.add_paragraph()
     p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    r = p.add_run('—— 2025 紫光同创杯 FPGA 创新大赛 · 赛题一 设计报告')
+    r = p.add_run('—— 2026 紫光同创杯 FPGA 创新大赛 · 赛题一 设计报告')
     set_font(r, size=14, ea=EA_H, color=ACCENT)
 
     for _ in range(4):
@@ -192,8 +192,8 @@ def cover(doc):
     t.alignment = WD_TABLE_ALIGNMENT.CENTER
     items = [('项目代号', 'PGT-RV32I-AI-01'),
              ('设计语言', 'Verilog-2001（可综合）'),
-             ('目标器件', '紫光同创 PGL22G 系列（板卡待定，工程参数化）'),
-             ('报告版本', 'V1.0  2025-11')]
+             ('目标器件', '紫光同创 PG2L200H（Logos2，远程实验箱已验证板级仿真）'),
+             ('报告版本', 'V1.1  2026-11')]
     for i, (k, v) in enumerate(items):
         c0, c1 = t.rows[i].cells
         c0.width = Cm(4); c1.width = Cm(9)
@@ -464,7 +464,7 @@ def ch7(doc):
            ['仿真器 B', 'Vivado Simulator 2023.1，交叉验证（sim/run_xsim.ps1）'],
            ['汇编器', '自研 rvasm.py（RV32I + Zicsr + M，免交叉工具链）'],
            ['C 工具链', 'riscv-none-elf-gcc 14.2.0（-march=rv32im_zicsr -O2）'],
-           ['综合', 'Vivado 2023.1，Artix-7 xc7a35t，OOC 估算（目标器件为 PGL22G）'],
+           ['综合', 'Vivado 2023.1，Artix-7 xc7a35t，OOC 估算（实际器件为 PG2L200H）'],
            ['判据', '写 0x3000_0000：bit0=1 通过；否则为失败码']],
           widths=[3.0, 13.4], size=9)
 
