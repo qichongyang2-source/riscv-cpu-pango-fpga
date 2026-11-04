@@ -14,6 +14,7 @@ import gzip
 import os
 import struct
 import sys
+import urllib.request
 
 import numpy as np
 
@@ -27,6 +28,23 @@ IN = DS * DS        # 196
 HID = 32
 OUT = 10
 SHIFT = 15
+
+MNIST_URLS = {
+    'train-images-idx3-ubyte.gz': 'https://storage.googleapis.com/cvdf-datasets/mnist/train-images-idx3-ubyte.gz',
+    'train-labels-idx1-ubyte.gz': 'https://storage.googleapis.com/cvdf-datasets/mnist/train-labels-idx1-ubyte.gz',
+    't10k-images-idx3-ubyte.gz':  'https://storage.googleapis.com/cvdf-datasets/mnist/t10k-images-idx3-ubyte.gz',
+    't10k-labels-idx1-ubyte.gz':  'https://storage.googleapis.com/cvdf-datasets/mnist/t10k-labels-idx1-ubyte.gz',
+}
+
+
+def ensure_data():
+    """数据缺失时从官方镜像下载（约 11 MB）"""
+    os.makedirs(DATA, exist_ok=True)
+    for fn, url in MNIST_URLS.items():
+        dst = os.path.join(DATA, fn)
+        if not os.path.exists(dst):
+            print('downloading %s ...' % fn)
+            urllib.request.urlretrieve(url, dst)
 
 
 def load_idx_images(path):
@@ -130,6 +148,7 @@ def sim_int8(x8, w1q, b1q, w2q, b2q, M):
 
 
 def main():
+    ensure_data()
     xtr = downsample(load_idx_images(os.path.join(DATA, 'train-images-idx3-ubyte.gz')))
     ytr = load_idx_labels(os.path.join(DATA, 'train-labels-idx1-ubyte.gz'))
     xte = downsample(load_idx_images(os.path.join(DATA, 't10k-images-idx3-ubyte.gz')))
