@@ -18,7 +18,8 @@ module soc_top #(
     parameter [31:0] MTVEC_INIT = 32'h0000_0040,
     parameter        IMEM_FILE  = "imem.hex",
     parameter        DMEM_FILE  = "dmem.hex",
-    parameter        MEM_INIT_EN = 1
+    parameter        MEM_INIT_EN = 1,
+    parameter        CLKS_PER_BIT = 16
 )(
     input  wire        clk,
     input  wire        rst_n,
@@ -200,7 +201,7 @@ module soc_top #(
     wire        uart_rx_valid;
     wire        uart_start = uart_we && (d_addr[3:2] == 2'd0);
 
-    uart_tx #(.CLKS_PER_BIT(16)) u_uart_tx (
+    uart_tx #(.CLKS_PER_BIT(CLKS_PER_BIT)) u_uart_tx (
         .clk  (clk),
         .rst_n(rst_n),
         .data (d_wdata[7:0]),
@@ -209,7 +210,7 @@ module soc_top #(
         .busy (uart_tx_busy)
     );
 
-    uart_rx #(.CLKS_PER_BIT(16)) u_uart_rx (
+    uart_rx #(.CLKS_PER_BIT(CLKS_PER_BIT)) u_uart_rx (
         .clk  (clk),
         .rst_n(rst_n),
         .rx   (uart_rx),
