@@ -1,0 +1,21 @@
+﻿WARNING: C:\Users\25924\Desktop\FPGA���´���-�Ϲ�ͬ��RISC_V_CPU\����\rtl\mem\imem.v:27: $readmemh(imem.hex): Not enough words in the file for the requested range [0:4095].
+WARNING: C:\Users\25924\Desktop\FPGA���´���-�Ϲ�ͬ��RISC_V_CPU\����\rtl\mem\dmem.v:33: $readmemh(dmem.hex): Not enough words in the file for the requested range [0:4095].
+[200000] reset released
+2K performance run parameters for coremark.
+CoreMark Size    : 666
+Total ticks      : 357397
+Total time (secs): 0
+ERROR! Must execute for at least 10 secs for a valid result!
+Iterations       : 1
+Compiler version : GCC14.2.0
+Compiler flags   : rv32im_zicsr -O2
+Memory location  : DMEM
+seedcrc          : 0xe9f5
+[0]crclist       : 0xe714
+[0]crcmatrix     : 0x1fd7
+[0]crcstate      : 0x8e3a
+[0]crcfinal      : 0xe714
+Errors detected=================================================
+ TEST PASSED  (cycles=453652, commits=388324)
+=================================================
+C:\Users\25924\Desktop\FPGA���´���-�Ϲ�ͬ��RISC_V_CPU\����\tb\tb_soc.v:132: $finish called at 9073050000 (1ps)

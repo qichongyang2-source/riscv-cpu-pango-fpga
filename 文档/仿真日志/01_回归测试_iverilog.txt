@@ -1,0 +1,27 @@
+﻿[build] compiling RTL ...
+  C:\Users\25924\Desktop\FPGA���´���-�Ϲ�ͬ��RISC_V_CPU\����\rtl\soc\soc_top.v:256: warning: Port 5 (reg_idx) of ai_accel expects 8 bits, got 6.
+  C:\Users\25924\Desktop\FPGA���´���-�Ϲ�ͬ��RISC_V_CPU\����\rtl\soc\soc_top.v:256:        : Padding 2 high bits of the port.
+[build] ok
+
+
+Test         Result Cycles Commits  IPC Code
+----         ------ ------ -------  --- ----
+t00_smoke    PASS   19     3       0.16     
+t01_alu      PASS   216    131     0.61     
+t02_branch   PASS   258    161     0.62     
+t03_mem      PASS   175    99      0.57     
+t04_jump     PASS   174    84      0.48     
+t05_csr_trap PASS   171    90      0.53     
+t06_sort     PASS   580    435     0.75     
+t07_hazard   PASS   137    70      0.51     
+t08_irq      PASS   6499   6431    0.99     
+t09_periph   PASS   245    170     0.69     
+t10_cache    PASS   15260  14622   0.96     
+t11_conflict PASS   444    405     0.91     
+t12_muldiv   PASS   532    118     0.22     
+t13_trap_ext PASS   180    89      0.49     
+t14_ai       PASS   206    119     0.58     
+
+
+
+ALL 15 TESTS PASSED

@@ -1,0 +1,28 @@
+﻿WARNING: C:\Users\25924\Desktop\FPGA���´���-�Ϲ�ͬ��RISC_V_CPU\����\rtl\mem\imem.v:27: $readmemh(imem.hex): Not enough words in the file for the requested range [0:4095].
+WARNING: C:\Users\25924\Desktop\FPGA���´���-�Ϲ�ͬ��RISC_V_CPU\����\rtl\mem\dmem.v:33: $readmemh(dmem.hex): Not enough words in the file for the requested range [0:4095].
+[200000] reset released
+MNIST inference on AI accelerator
+  img 0: pred 7 label 7  OK
+  img 1: pred 2 label 2  OK
+  img 2: pred 1 label 1  OK
+  img 3: pred 0 label 0  OK
+  img 4: pred 4 label 4  OK
+  img 5: pred 1 label 1  OK
+  img 6: pred 4 label 4  OK
+  img 7: pred 9 label 9  OK
+  img 8: pred 6 label 5  NG
+  img 9: pred 9 label 9  OK
+  img 10: pred 0 label 0  OK
+  img 11: pred 6 label 6  OK
+  img 12: pred 9 label 9  OK
+  img 13: pred 0 label 0  OK
+  img 14: pred 1 label 1  OK
+  img 15: pred 5 label 5  OK
+  img 16: pred 9 label 9  OK
+  img 17: pred 7 label 7  OK
+  img 18: pred 3 label 3  OK
+  img 19: pred 4 label 4  OK
+correct: 19/20=================================================
+ TEST PASSED  (cycles=170691, commits=133674)
+=================================================
+C:\Users\25924\Desktop\FPGA���´���-�Ϲ�ͬ��RISC_V_CPU\����\tb\tb_soc.v:132: $finish called at 3413830000 (1ps)
