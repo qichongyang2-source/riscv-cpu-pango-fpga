@@ -64,6 +64,12 @@ module tb_board;
 
     //------------------------- 超时与结论 -----------------------------------
     integer cyc = 0;
+    integer max_cyc = 400000;
+
+    initial begin
+        if ($value$plusargs("CYCLES=%d", max_cyc))
+            $display("[tb] run %0d cycles", max_cyc);
+    end
     integer hb_toggles = 0;
     reg led0_q = 1'b1;
 
@@ -74,7 +80,7 @@ module tb_board;
             led0_q <= led[0];
             hb_toggles = hb_toggles + 1;
         end
-        if (cyc == 400000) begin
+        if (cyc >= max_cyc) begin
             $display("");
             $display("=================================================");
             $display(" UART chars = %0d", nchar);
