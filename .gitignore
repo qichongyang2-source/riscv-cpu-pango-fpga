@@ -1,0 +1,33 @@
+# 仿真与构建产物
+代码/sim/work/
+*.vvp
+*.vcd
+*.fst
+*.wdb
+*.pb
+*.jou
+*.log
+
+# C 构建产物
+代码/sw/c/*.elf
+代码/sw/c/*.hex
+代码/sw/c/*.lst
+代码/sw/c/*.o
+代码/sw/c/*.s
+
+# 数据集与缓存（train_mnist.py 会从官方地址下载）
+代码/sw/ai/data/
+__pycache__/
+*.pyc
+
+# 提交压缩包（体积大，且与仓库内容重复）
+文档/提交材料/*.zip
+文档/提交材料/*.rar
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 个人比赛日志（如要开源可删掉此行）
+比赛日志.pptx

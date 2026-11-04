@@ -1,0 +1,34 @@
+#=============================================================================
+#  pango_pins_template.fdc : 紫光同创 PDS 物理约束模板
+#
+#  说明:
+#   1. 以下引脚位置 (LOCATION) 为占位示例，务必按实际开发板原理图修改。
+#   2. PDS 的物理约束文件后缀为 .fdc，语法为:
+#          set_pin_assignment { <信号名> } { LOCATION = <引脚>; }
+#      总线上按位书写，例如 { led[0] }。
+#   3. 若需设置 IO 电平标准，可追加 IOSTANDARD = LVCMOS33;
+#   4. 时序约束放在同名 .sdc 中（见 timing_template.sdc）。
+#=============================================================================
+
+#--------------------------- 时钟与复位 --------------------------------------
+set_pin_assignment { clk   } { LOCATION = R7;  IOSTANDARD = LVCMOS33; }
+set_pin_assignment { rst_n } { LOCATION = T3;  IOSTANDARD = LVCMOS33; }
+
+#--------------------------- UART --------------------------------------------
+set_pin_assignment { uart_tx } { LOCATION = T10; IOSTANDARD = LVCMOS33; }
+set_pin_assignment { uart_rx } { LOCATION = R11; IOSTANDARD = LVCMOS33; }
+
+#--------------------------- LED ---------------------------------------------
+set_pin_assignment { led[0] } { LOCATION = N14; IOSTANDARD = LVCMOS33; }
+set_pin_assignment { led[1] } { LOCATION = P14; IOSTANDARD = LVCMOS33; }
+set_pin_assignment { led[2] } { LOCATION = T14; IOSTANDARD = LVCMOS33; }
+set_pin_assignment { led[3] } { LOCATION = R14; IOSTANDARD = LVCMOS33; }
+
+#--------------------------- 按键 --------------------------------------------
+set_pin_assignment { key[0] } { LOCATION = M14; IOSTANDARD = LVCMOS33; }
+set_pin_assignment { key[1] } { LOCATION = L13; IOSTANDARD = LVCMOS33; }
+set_pin_assignment { key[2] } { LOCATION = J13; IOSTANDARD = LVCMOS33; }
+set_pin_assignment { key[3] } { LOCATION = K14; IOSTANDARD = LVCMOS33; }
+
+#--------------------------- 未使用信号 --------------------------------------
+# 建议在 PDS 工程中将未用 IO 设置为三态/上拉，避免漏电。
